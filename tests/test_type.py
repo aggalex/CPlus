@@ -34,7 +34,7 @@ class TestScope(unittest.TestCase):
         self.assertEqual(struct.type, Type.Type.STRUCT)
         self.assertEqual(struct.name, "point")
         self.assertEqual(struct.pattern_choice, 0)
-        self.assertEqual(struct.contents.match.group(), r"""{
+        self.assertEqual(struct.scope.match.group(), r"""{
             int x;
             int y;
         }""")
@@ -62,7 +62,7 @@ class TestScope(unittest.TestCase):
         self.assertEqual(struct.type, Type.Type.STRUCT)
         self.assertEqual(struct.name, None)
         self.assertEqual(struct.pattern_choice, 1)
-        self.assertEqual(struct.contents.match.group(), r"""{
+        self.assertEqual(struct.scope.match.group(), r"""{
             int x;
             int y;
         }""")

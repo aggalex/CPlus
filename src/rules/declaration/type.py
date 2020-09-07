@@ -46,4 +46,5 @@ class Type(Rule):
         except KeyError:
             self.name = None
 
+        self.scope = self.match[Scope]
         self.contents = self.match[Scope].get_contents(StructContents)

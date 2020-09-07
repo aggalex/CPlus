@@ -1,4 +1,3 @@
-from ..variable import Variable
 from ..scope.scope_contents import ScopeContents, Rule
 import regex
 
@@ -7,9 +6,10 @@ class StructContents(ScopeContents):
     class Member(Rule):
 
         SEMICOLON = regex.compile(r";")
-        PATTERN = (Variable, SEMICOLON)
 
         def __init__(self, string):
+            from ..variable import Variable
+            self.PATTERN = (Variable, self.SEMICOLON)
             super().__init__(string)
             self.variable = self.match[Variable]
 

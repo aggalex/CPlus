@@ -45,7 +45,7 @@ class TestDeclaration(unittest.TestCase):
         self.assertEqual(struct.declaration.type.type, Type.Type.STRUCT)
         self.assertEqual(struct.declaration.type.name, "point")
         self.assertEqual(struct.declaration.type.pattern_choice, 0)
-        self.assertEqual(struct.declaration.type.contents.match.group(), r"""{
+        self.assertEqual(struct.declaration.type.scope.match.group(), r"""{
             int x;
             int y;
         }""")
@@ -66,7 +66,7 @@ class TestDeclaration(unittest.TestCase):
         self.assertEqual(struct.declaration.type.type, Type.Type.STRUCT)
         self.assertEqual(struct.declaration.type.name, None)
         self.assertEqual(struct.declaration.type.pattern_choice, 1)
-        self.assertEqual(struct.declaration.type.contents.match.group(), r"""{
+        self.assertEqual(struct.declaration.type.scope.match.group(), r"""{
             int x;
             int y;
         }""")
