@@ -7,21 +7,6 @@ WHITESPACE = regex.compile(r"\s*")
 class Rule:
 
     def __init__(self, string):
-        # self.string = string
-        # if self.PATTERN.__class__ != list:
-        #     self.match = self.PATTERN.search(string)
-        # else: 
-        #     for patterns in self.PATTERN:
-        #         if patterns.__class__ == tuple:
-        #             for pattern in patterns:
-        #                 if self.pattern.__class__ == MatchInfo:
-        #                     self.match = self.pattern()
-        #         elif match := patterns.search(string):
-        #             self.match = match
-        #             break
-        # if not self.match:
-        #     raise MatchError(string, self.PATTERN.__class__)
-        # self.start, self.end = self.match.span()
         self.string = string
 
         patterns = None

@@ -1,4 +1,4 @@
-from . import Rule
+from .. import Rule
 import regex
 
 class Scope(Rule):
