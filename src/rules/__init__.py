@@ -25,19 +25,19 @@ class Rule:
         for pattern in patterns:
             end = 0
             for segment in pattern if pattern.__class__ == tuple else (pattern,):
-                print(f"String: '{string[end:]}'")
+                # print(f"String: '{string[end:]}'")
                 ws_data = WHITESPACE.match(string[end:])
                 _, ws_end = ws_data.span()
                 end += ws_end
-                print(f"WSSTR: '{string[end:]}'")
+                # print(f"WSSTR: '{string[end:]}'")
                 data = None
                 if segment.__class__ == type and issubclass(segment, Rule):
                     try:
-                        print(f"MATCHING {segment.__name__} WITH {string[end:]}")
+                        # print(f"MATCHING {segment.__name__} WITH {string[end:]}")
                         data = segment(string[end:])
                         end += data.end
-                    except MatchError as err:
-                        print(f"Match failed: {err}")
+                    except MatchError:
+                        # print(f"Match failed: {err}")
                         data = None
                 else:
                     data = segment.match(string[end:])

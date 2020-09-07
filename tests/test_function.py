@@ -22,11 +22,11 @@ class TestFunction(unittest.TestCase):
         ]
 
         for i in range(len(function.args)):
-            found = function.args[i]
+            found = function.args[i].declaration
             to_match = args[i]
             self.assertEqual(found.type.name, to_match[0])
             self.assertEqual(found.name, to_match[1])
 
-        self.assertEqual(function.scope, """{
+        self.assertEqual(function.scope.match.group(), """{
             return calloc(size, n)
         }""")
