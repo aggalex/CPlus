@@ -1,6 +1,7 @@
 import unittest
 from src.rules.declaration.type import Type
-from src.rules.declaration.struct_contents import StructContents, Variable
+from src.rules.declaration.struct_contents import StructContents
+from src.rules.variable import Variable
 from src.rules import MatchError
 
 class TestStructContents(unittest.TestCase):
