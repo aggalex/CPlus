@@ -17,6 +17,8 @@ class Variable(Rule):
 
         self.declaration = self.match[Declaration]
         self.declaration.pointer_depth += self.match[self.ARRAY_INDICES].group().count("[")
+        # assert(len(self.declaration.name.identifier) == 1)
+        # self.name = self.declaration.name.identifier[0]
         try:
             self.evaluation = self.match[self.EVALUATION].match.group()
         except KeyError:
