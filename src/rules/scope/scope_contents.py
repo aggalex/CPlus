@@ -4,8 +4,6 @@ from .. import Rule
 
 class ScopeContents(Rule):
 
-
-
     def __init__(self, string):
         self.PATTERN = [
             self.CONTENT,

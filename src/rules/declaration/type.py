@@ -2,6 +2,7 @@ from .. import Rule
 from ..identifier import Identifier
 from ..scope import Scope
 from enum import IntEnum
+from .struct_contents import StructContents
 import regex
 
 class Type(Rule):
@@ -45,4 +46,4 @@ class Type(Rule):
         except KeyError:
             self.name = None
 
-        self.contents = self.match[Scope]
+        self.contents = self.match[Scope].get_contents(StructContents)

@@ -1,4 +1,5 @@
 from .. import Rule
+from .scope_contents import ScopeContents
 import regex
 
 class Scope(Rule):
@@ -13,6 +14,11 @@ class Scope(Rule):
                 "sub": scope.get_subscopes()
             }
         for scope in subscopes)
+
+    def get_contents(self, cls):
+        if not issubclass(cls, ScopeContents):
+            raise TypeError(f"Expected class that inherits from ScopeContents, got {cls}")
+        return cls(self.match.group()[1:-1])
 
     def __str__(self):
         return str(self.match)

@@ -38,7 +38,17 @@ class TestScope(unittest.TestCase):
             int x;
             int y;
         }""")
-    
+
+        members = [
+            ("int", "x"),
+            ("int", "y")
+        ]
+        for i in range(len(struct.contents.members)):
+            found = struct.contents.members[i]
+            to_match = members[i]
+            self.assertEqual(found.declaration.name, to_match[1])
+            self.assertEqual(found.declaration.type.name, to_match[0])
+
     def test_struct_unamed(self):
         struct = Type(r"""
         
