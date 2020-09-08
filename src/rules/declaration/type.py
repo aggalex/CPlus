@@ -1,5 +1,5 @@
 from .. import Rule
-from ..identifier import Identifier
+from ..namespaced_identifier import NamespacedIdentifier
 from ..scope import Scope
 from enum import IntEnum
 from .struct_contents import StructContents
@@ -10,10 +10,9 @@ class Type(Rule):
     KEYWORD = regex.compile(r"struct|union|enum")
 
     PATTERN = [
-        (KEYWORD, Identifier, Scope),
+        (KEYWORD, NamespacedIdentifier, Scope),
         (KEYWORD, Scope),
-        Identifier,
-        # (regex.compile(r"typedef"), Type, Identifier),
+        NamespacedIdentifier,
     ]
 
     class Type(IntEnum):
@@ -34,17 +33,23 @@ class Type(Rule):
     def __init__(self, string):
         super().__init__(string)
 
+        self.namespaces = []
+
         if self.match.__class__ != dict:
             self.type = self.Type.NAMED
-            self.name = self.match.match.group()
+            self.__set_name(self.match)
             return
         
         self.type = self.Type.from_keyword(self.match[self.KEYWORD].group())
 
         try:
-            self.name = self.match[Identifier].match.group()
+            self.__set_name(self.match[NamespacedIdentifier])
         except KeyError:
             self.name = None
 
         self.scope = self.match[Scope]
         self.contents = self.match[Scope].get_contents(StructContents)
+
+    def __set_name(self, ns_ident):
+        self.name = ns_ident.identifiers[-1]
+        self.namespaces = ns_ident.identifiers[:-1]

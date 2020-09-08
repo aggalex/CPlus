@@ -8,8 +8,8 @@ class Variable(Rule):
     EVALUATION = regex.compile(r'=\s*([^;"]|"((\\")|[^"])*")*')
 
     PATTERN = [
-        (Declaration, ARRAY_INDICES),
-        (Declaration, ARRAY_INDICES, EVALUATION)
+        (Declaration, ARRAY_INDICES, EVALUATION),
+        (Declaration, ARRAY_INDICES)
     ]
 
     def __init__(self, string):
@@ -17,9 +17,8 @@ class Variable(Rule):
 
         self.declaration = self.match[Declaration]
         self.declaration.pointer_depth += self.match[self.ARRAY_INDICES].group().count("[")
-        # assert(len(self.declaration.name.identifier) == 1)
-        # self.name = self.declaration.name.identifier[0]
+        self.name = self.declaration.name
         try:
-            self.evaluation = self.match[self.EVALUATION].match.group()
+            self.evaluation = self.match[self.EVALUATION].group().strip()
         except KeyError:
             self.evaluation = None

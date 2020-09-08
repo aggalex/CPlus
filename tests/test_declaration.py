@@ -20,6 +20,7 @@ class TestDeclaration(unittest.TestCase):
             declaration = declarations[t]
             self.assertEqual(declaration.type.type, Type.Type.NAMED)
             self.assertEqual(declaration.type.pattern_choice, 2)
+            self.assertEqual(declaration.type.namespaces, [])
             self.assertEqual(declaration.type.name, t.split(" ")[0])
             self.assertEqual(declaration.name, t.split(" ")[1])
 

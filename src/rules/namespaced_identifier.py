@@ -13,6 +13,6 @@ class NamespacedIdentifier(Rule):
         ]
         super().__init__(string)
         if self.pattern_choice == 1:
-            self.identifiers = [self.match]
+            self.identifiers = [self.match.match.group()]
         else:
-            self.identifiers = [self.match[Identifier]] + self.match[NamespacedIdentifier].identifiers
+            self.identifiers = [self.match[Identifier].match.group()] + self.match[NamespacedIdentifier].identifiers

@@ -28,8 +28,8 @@ class TestDeclaration(unittest.TestCase):
         self.assertEqual(Variable("int *run[][]").declaration.pointer_depth, 3)
         self.assertEqual(Variable("char **str[]").declaration.pointer_depth, 3)
 
-    def type_type_identifier_evaluation(self):
-        self.assertEqual(Variable('int *run[][] = get_run("tht", "r+")').declaration.pointer_depth, '= get_run("tht", "r+")')
+    def test_type_identifier_evaluation(self):
+        self.assertEqual(Variable('int *run[][] = get_run("tht", "r+")').evaluation, '= get_run("tht", "r+")')
         self.assertEqual(Variable("char *str = malloc(12 * sizeof(char))").evaluation, "= malloc(12 * sizeof(char))")
 
     def test_struct(self):
@@ -72,4 +72,4 @@ class TestDeclaration(unittest.TestCase):
         }""")
         self.assertEqual(struct.declaration.name, "unnamed_point")
         self.assertEqual(struct.declaration.pointer_depth, 2)
-        # self.assertEqual(struct.evaluation, "= get_points(5, 12)") TODO
+        self.assertEqual(struct.evaluation, "= get_points(5, 12)")
