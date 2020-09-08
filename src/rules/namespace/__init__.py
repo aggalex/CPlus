@@ -1,9 +1,9 @@
-from . import Rule
-from .namespaced_identifier import NamespacedIdentifier
-from .scope import Scope
+from .. import Rule
+from ..namespaced_identifier import NamespacedIdentifier
+from ..scope import Scope
 import regex
 
-class Identifier(Rule):
+class Namespace(Rule):
 
     NAMESPACE = regex.compile(r"namespace")
 

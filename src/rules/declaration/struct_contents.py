@@ -13,8 +13,6 @@ class StructContents(ScopeContents):
             super().__init__(string)
             self.variable = self.match[Variable]
 
-    CONTENT = Member
-
     def __init__(self, string):
         super().__init__(string)
         self.members = [p.variable for p in self.patterns]

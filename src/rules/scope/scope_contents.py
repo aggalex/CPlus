@@ -6,8 +6,8 @@ class ScopeContents(Rule):
 
     def __init__(self, string):
         self.PATTERN = [
-            self.CONTENT,
-            (self.__class__, self.CONTENT)
+            self.Member,
+            (self.__class__, self.Member)
         ]
         super().__init__(string)
         if self.pattern_choice == 0:
