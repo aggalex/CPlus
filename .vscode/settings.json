@@ -13,5 +13,9 @@
     "python.linting.pylintEnabled": true,
     "python.linting.mypyEnabled": false,
     "python.linting.enabled": true,
-    "python.linting.pylamaEnabled": false
+    "python.linting.pylamaEnabled": false,
+    "files.associations": {
+        "*.cp": "cpp",
+        "*.hp": "cpp"
+    }
 }

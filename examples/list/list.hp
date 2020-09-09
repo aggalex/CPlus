@@ -1,0 +1,36 @@
+#include <stdio.hp>
+
+typedef ERROR("IndexError") IndexError;
+
+template<G>
+typedef struct {
+    List::ListNode<G> head;
+    List::ListNode<G> tail;
+    int size;
+} List<G>;
+
+namespace List {
+
+    template<G>
+    ListNode<G> ListNode::new(ListNode<G> *next, ListNode<G> *prev, G data) {
+        return (ListNode<G>) {
+            .prev = prev,
+            .next = next,
+            .data = data
+        };
+    }
+
+    template<G> List<G> new();
+    template<G> G get(ListM<G> *this, int index);
+    template<G> void add(List<G> *this);
+    template<G> void remove(List<G> *this);
+    template<G> void delete(List<G> *this);
+    template<G> void foreach(List<G> *this);
+
+}
+
+namespace __tests__ {
+
+    void test_list();
+
+}
