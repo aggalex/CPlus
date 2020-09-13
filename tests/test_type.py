@@ -17,7 +17,6 @@ class TestType(unittest.TestCase):
 
         for t in types.keys():
             self.assertEqual(types[t].type, Type.Type.NAMED)
-            self.assertEqual(types[t].pattern_choice, 2)
             self.assertEqual(types[t].name, t)
             self.assertEqual(types[t].namespaces, [])
 
@@ -35,7 +34,6 @@ class TestType(unittest.TestCase):
         for t in types.keys():
             namespace_list = t.split("::")
             self.assertEqual(types[t].type, Type.Type.NAMED)
-            self.assertEqual(types[t].pattern_choice, 2)
             self.assertEqual(types[t].name, namespace_list[-1])
             self.assertEqual(types[t].namespaces, namespace_list[:-1])
 
@@ -52,7 +50,6 @@ class TestType(unittest.TestCase):
         self.assertEqual(struct.type, Type.Type.STRUCT)
         self.assertEqual(struct.name, "point")
         self.assertEqual(struct.namespaces, [])
-        self.assertEqual(struct.pattern_choice, 0)
         self.assertEqual(struct.scope.match.group(), r"""{
             int x;
             int y;
@@ -81,7 +78,6 @@ class TestType(unittest.TestCase):
         self.assertEqual(struct.type, Type.Type.STRUCT)
         self.assertEqual(struct.name, None)
         self.assertEqual(struct.namespaces, [])
-        self.assertEqual(struct.pattern_choice, 1)
         self.assertEqual(struct.scope.match.group(), r"""{
             int x;
             int y;

@@ -16,6 +16,8 @@ class NamespaceContents(ScopeContents):
             from ..comment import Comment
             from ..include import Include
             from ..preprocessor import Preprocessor
+            from ..template import Template
+            from ..declaration import Type
 
             self.PATTERN = [
                 (Variable, self.SEMICOLON),
@@ -23,6 +25,8 @@ class NamespaceContents(ScopeContents):
                 Preprocessor,
                 Typedef,
                 Function,
+                Type,
+                Template,
                 Using,
                 Namespace,
                 Comment,

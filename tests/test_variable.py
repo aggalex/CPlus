@@ -3,7 +3,7 @@ from src.rules.declaration.type import Type
 from src.rules.variable import Variable
 from src.rules import MatchError
 
-class TestDeclaration(unittest.TestCase):
+class TestVariable(unittest.TestCase):
 
     def test_type_identifier(self):
         typenames = [
@@ -19,7 +19,6 @@ class TestDeclaration(unittest.TestCase):
         for t in variables.keys():
             variable = variables[t]
             self.assertEqual(variable.declaration.type.type, Type.Type.NAMED)
-            self.assertEqual(variable.declaration.type.pattern_choice, 3)
             self.assertEqual(variable.declaration.type.name, t.split(" ")[0])
             self.assertEqual(variable.declaration.name, t.split(" ")[1])
             self.assertEqual(variable.evaluation, None)
@@ -44,7 +43,6 @@ class TestDeclaration(unittest.TestCase):
 
         self.assertEqual(struct.declaration.type.type, Type.Type.STRUCT)
         self.assertEqual(struct.declaration.type.name, "point")
-        self.assertEqual(struct.declaration.type.pattern_choice, 0)
         self.assertEqual(struct.declaration.type.scope.match.group(), r"""{
             int x;
             int y;
@@ -65,7 +63,6 @@ class TestDeclaration(unittest.TestCase):
 
         self.assertEqual(struct.declaration.type.type, Type.Type.STRUCT)
         self.assertEqual(struct.declaration.type.name, None)
-        self.assertEqual(struct.declaration.type.pattern_choice, 1)
         self.assertEqual(struct.declaration.type.scope.match.group(), r"""{
             int x;
             int y;

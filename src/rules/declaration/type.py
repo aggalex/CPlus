@@ -13,6 +13,8 @@ class Type(Rule):
     PATTERN = [
         (KEYWORD, NamespacedIdentifier, Scope),
         (KEYWORD, Scope),
+        (KEYWORD, NamespacedIdentifier, Generics),
+        (KEYWORD, NamespacedIdentifier),
         (NamespacedIdentifier, Generics),
         NamespacedIdentifier,
     ]
@@ -39,13 +41,13 @@ class Type(Rule):
 
         self.generics = None
 
-        if self.pattern_choice == 2:
+        if self.pattern_choice == 4:
             self.generics = self.match[Generics]
             self.type = self.Type.NAMED
             self.__set_name(self.match[NamespacedIdentifier])
             return
 
-        if self.pattern_choice == 3:
+        if self.pattern_choice == 5:
             self.type = self.Type.NAMED
             self.__set_name(self.match)
             return
@@ -57,8 +59,12 @@ class Type(Rule):
         except KeyError:
             self.name = None
 
-        self.scope = self.match[Scope]
-        self.contents = self.match[Scope].get_contents(StructContents)
+        try:
+            self.scope = self.match[Scope]
+            self.contents = self.scope.get_contents(StructContents)
+        except KeyError:
+            self.scope = None
+            self.contents = None
 
     def __set_name(self, ns_ident):
         self.name = ns_ident.identifiers[-1]

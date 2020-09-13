@@ -10,7 +10,7 @@
         - Variable definitions
         - foreach loops `for (G data: iterable)` -> `for (G *data = iterable.foreach(); data != NULL; data = iterable.foreach())`
         - method definitions: if member is not part of data struct `data.member(args)` -> `member(data, args)`, `data->member(args)` -> `member(*data, args)`
-        - Automatic templates `List({1, 2, 3, 4})` -> `List<int>({1, 2, 3, 4})` because `{1, 2, 3, 4}` is `int[]`
+        - (CANCELLED) Automatic templates `List({1, 2, 3, 4})` -> `List<int>({1, 2, 3, 4})` because `{1, 2, 3, 4}` is `int[]`
 
     - Polymorphism:
         - Resolve base of type based on the `base` field of the class
