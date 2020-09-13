@@ -13,17 +13,24 @@ class NamespaceContents(ScopeContents):
             from ..typedef import Typedef
             from ..function import Function
             from ..using import Using
+            from ..comment import Comment
+            from ..include import Include
+            from ..preprocessor import Preprocessor
 
             self.PATTERN = [
                 (Variable, self.SEMICOLON),
+                Include,
+                Preprocessor,
                 Typedef,
                 Function,
                 Using,
-                Namespace
+                Namespace,
+                Comment,
             ]
 
             super().__init__(string)
-            self.variable = self.match[Variable]
+            if self.pattern_choice == 0:
+                self.match = self.match[Variable]
 
     def __init__(self, string):
         super().__init__(string)
