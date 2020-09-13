@@ -1,6 +1,7 @@
 from .. import Rule
 from ..namespaced_identifier import NamespacedIdentifier
 from ..scope import Scope
+from .namespace_contents import NamespaceContents
 import regex
 
 class Namespace(Rule):
@@ -13,3 +14,4 @@ class Namespace(Rule):
         super().__init__(string)
         self.name = self.match[NamespacedIdentifier]
         self.scope = self.match[Scope]
+        self.contents = self.scope.get_contents(NamespaceContents)

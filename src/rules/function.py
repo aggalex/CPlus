@@ -26,13 +26,17 @@ class Function(Rule):
 
     PATTERN = [
         (Declaration, OPEN_PAREN, Arguments, CLOSE_PAREN, Scope),
-        (Declaration, OPEN_PAREN, Arguments, CLOSE_PAREN, SEMICOLON)
+        (Declaration, OPEN_PAREN, Arguments, CLOSE_PAREN, SEMICOLON),
+        (Declaration, OPEN_PAREN, CLOSE_PAREN, Scope),
+        (Declaration, OPEN_PAREN, CLOSE_PAREN, SEMICOLON)
     ]
-    
 
     def __init__(self, string):
         super().__init__(string)
-        self.args = self.match[Arguments].variables
+        try:
+            self.args = self.match[Arguments].variables
+        except KeyError:
+            self.arg = []
         self.declaration = self.match[Declaration]
         try:
             self.scope = self.match[Scope]

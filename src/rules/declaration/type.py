@@ -61,10 +61,16 @@ class Type(Rule):
 
         try:
             self.scope = self.match[Scope]
-            self.contents = self.scope.get_contents(StructContents)
         except KeyError:
             self.scope = None
             self.contents = None
+
+        if self.scope != None:
+            self.contents = self.scope.get_contents(StructContents)
+            try:
+                self.base = next(member.declaration.type for member in self.contents.members if member.declaration.name == "base")
+            except StopIteration:
+                pass
 
     def __set_name(self, ns_ident):
         self.name = ns_ident.identifiers[-1]

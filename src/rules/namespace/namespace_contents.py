@@ -1,5 +1,4 @@
 from ..scope.scope_contents import ScopeContents, Rule
-from . import Namespace
 import regex
 
 class NamespaceContents(ScopeContents):
@@ -9,6 +8,7 @@ class NamespaceContents(ScopeContents):
         SEMICOLON = regex.compile(r";")
 
         def __init__(self, string):
+            from . import Namespace
             from ..variable import Variable
             from ..typedef import Typedef
             from ..function import Function
@@ -20,16 +20,16 @@ class NamespaceContents(ScopeContents):
             from ..declaration import Type
 
             self.PATTERN = [
-                (Variable, self.SEMICOLON),
+                Comment,
                 Include,
                 Preprocessor,
+                Namespace,
+                Using,
+                Template,
                 Typedef,
                 Function,
-                Type,
-                Template,
-                Using,
-                Namespace,
-                Comment,
+                (Variable, self.SEMICOLON),
+                Type
             ]
 
             super().__init__(string)
