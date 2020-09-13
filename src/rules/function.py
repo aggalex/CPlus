@@ -22,11 +22,19 @@ class Function(Rule):
 
     OPEN_PAREN = regex.compile(r"\(")
     CLOSE_PAREN = regex.compile(r"\)")
+    SEMICOLON = regex.compile(r";")
 
-    PATTERN = (Declaration, OPEN_PAREN, Arguments, CLOSE_PAREN, Scope)
+    PATTERN = [
+        (Declaration, OPEN_PAREN, Arguments, CLOSE_PAREN, Scope),
+        (Declaration, OPEN_PAREN, Arguments, CLOSE_PAREN, SEMICOLON)
+    ]
+    
 
     def __init__(self, string):
         super().__init__(string)
         self.args = self.match[Arguments].variables
         self.declaration = self.match[Declaration]
-        self.scope = self.match[Scope]
+        try:
+            self.scope = self.match[Scope]
+        except KeyError:
+            self.scope = None

@@ -19,10 +19,38 @@ class TestDeclaration(unittest.TestCase):
         for t in declarations.keys():
             declaration = declarations[t]
             self.assertEqual(declaration.type.type, Type.Type.NAMED)
-            self.assertEqual(declaration.type.pattern_choice, 2)
+            self.assertEqual(declaration.type.pattern_choice, 3)
             self.assertEqual(declaration.type.namespaces, [])
             self.assertEqual(declaration.type.name, t.split(" ")[0])
             self.assertEqual(declaration.name, t.split(" ")[1])
+
+    def test_generics(self):
+        declaration = Declaration("List<int> add<int>")
+        self.assertEqual(declaration.type.generics[0].name, "int")
+        self.assertEqual(declaration.generics[0].name, "int")
+        self.assertEqual(len(declaration.type.generics), 1)
+        self.assertEqual(len(declaration.generics), 1)
+
+        declaration = Declaration("HashMap<String, List<int>> assign<List<int>>")
+        self.assertEqual(declaration.type.generics[0].name, "String")
+        self.assertEqual(declaration.type.generics[1].name, "List")
+        self.assertEqual(declaration.type.generics[1].generics[0].name, "int")
+        self.assertEqual(len(declaration.type.generics[1].generics), 1)
+        self.assertEqual(len(declaration.type.generics), 2)
+        self.assertEqual(declaration.generics[0].name, "List")
+        self.assertEqual(declaration.generics[0].generics[0].name, "int")
+        self.assertEqual(len(declaration.type.generics[1].generics), 1)
+        self.assertEqual(len(declaration.type.generics), 2)
+
+        declaration = Declaration("Point<G> set")
+        self.assertEqual(declaration.type.generics[0].name, "G")
+        self.assertEqual(len(declaration.type.generics), 1)
+        self.assertEqual(declaration.generics, None)
+
+        declaration = Declaration("G new<G>")
+        self.assertEqual(declaration.generics[0].name, "G")
+        self.assertEqual(len(declaration.generics), 1)
+        self.assertEqual(declaration.type.generics, None)
 
     def test_struct(self):
         struct = Declaration(r"""

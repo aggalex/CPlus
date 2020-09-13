@@ -19,7 +19,7 @@ class TestDeclaration(unittest.TestCase):
         for t in variables.keys():
             variable = variables[t]
             self.assertEqual(variable.declaration.type.type, Type.Type.NAMED)
-            self.assertEqual(variable.declaration.type.pattern_choice, 2)
+            self.assertEqual(variable.declaration.type.pattern_choice, 3)
             self.assertEqual(variable.declaration.type.name, t.split(" ")[0])
             self.assertEqual(variable.declaration.name, t.split(" ")[1])
             self.assertEqual(variable.evaluation, None)

@@ -3,6 +3,7 @@ from ..namespaced_identifier import NamespacedIdentifier
 from ..scope import Scope
 from enum import IntEnum
 from .struct_contents import StructContents
+from .generics import Generics
 import regex
 
 class Type(Rule):
@@ -12,6 +13,7 @@ class Type(Rule):
     PATTERN = [
         (KEYWORD, NamespacedIdentifier, Scope),
         (KEYWORD, Scope),
+        (NamespacedIdentifier, Generics),
         NamespacedIdentifier,
     ]
 
@@ -35,7 +37,15 @@ class Type(Rule):
 
         self.namespaces = []
 
-        if self.match.__class__ != dict:
+        self.generics = None
+
+        if self.pattern_choice == 2:
+            self.generics = self.match[Generics]
+            self.type = self.Type.NAMED
+            self.__set_name(self.match[NamespacedIdentifier])
+            return
+
+        if self.pattern_choice == 3:
             self.type = self.Type.NAMED
             self.__set_name(self.match)
             return
