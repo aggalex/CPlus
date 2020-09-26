@@ -11,15 +11,6 @@ typedef struct {
 
 namespace List {
 
-    template<G>
-    ListNode<G> ListNode::new(ListNode<G> *next, ListNode<G> *prev, G data) {
-        return (ListNode<G>) {
-            .prev = prev,
-            .next = next,
-            .data = data
-        };
-    }
-
     template<G> List<G> new();
     template<G> G get(ListM<G> *this, int index);
     template<G> void add(List<G> *this);
